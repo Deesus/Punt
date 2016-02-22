@@ -27,17 +27,6 @@ def minify(filepath, comments=False):
                     for line in file_)
     return output
 
-line = '''{
-    margin: 0; padding: 0;
-}
-    html { box-sizing: border-box;
-}
-    *, *::before, *::after { box-sizing: inherit;
-}
-img {
-    /*image automatically resizes to max-width of the boundary*/
-'''
-
 
 if __name__ == "__main__":
     print(minify('./test/stylesheet.css'))
