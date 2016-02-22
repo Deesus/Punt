@@ -14,18 +14,30 @@ def minify(filepath, comments=False):
         file_:
         comments: Boolean. If False, deletes comments during output.
     :return:
+        Minified string.
     """
 
     output = ''
     with open(filepath, "r") as file_:
-        for line in file_:
-            temp = ''
-            for char in line:
-                if (char != ' ') and (char != '\n'):
-                    temp += char
-            output += temp
+        output = ''.join(
+                    ''.join(
+                        char for char in line
+                        if (char != ' ') and (char != '\n')
+                    )
+                    for line in file_)
     return output
+
+line = '''{
+    margin: 0; padding: 0;
+}
+    html { box-sizing: border-box;
+}
+    *, *::before, *::after { box-sizing: inherit;
+}
+img {
+    /*image automatically resizes to max-width of the boundary*/
+'''
 
 
 if __name__ == "__main__":
-    print(minify('./stylesheet.css'))
+    print(minify('./test/stylesheet.css'))
