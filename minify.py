@@ -17,15 +17,26 @@ def minify(filepath, comments=False):
         Minified string.
     """
 
-    output = ''
+    pattern = re.compile(r"""
+        \s |                    # matches all whitespace characters OR
+         (                      #
+            /\*                 # /*
+            [
+                \w\s
+                (?=\*)
+                :@!"'~\.\^\$\+\?\{\}\[\]\\\|\(\)
+            ]*                  # AND
+            \*/                 # */
+         )                      #
+         | //.*\n               # OR any character from // until end-line (inclusive)
+    """, re.VERBOSE)
+
     with open(filepath, "r") as file_:
-        output = ''.join(
-                    ''.join(
-                        char for char in line
-                        if (char != ' ') and (char != '\n')
-                    )
-                    for line in file_)
-    return output
+        temp = []
+        for line in file_:
+            temp.append(line)
+        output = ''.join(temp)
+        return pattern.sub('', output)
 
 
 if __name__ == "__main__":
