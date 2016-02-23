@@ -20,19 +20,15 @@ def minify(input_path, output_path, comments=False):
         `$ python minify.py ./src/styles.css ./src/output.css`
     """
 
+    # matches all in-line and multi-line comments; matches all spaces:
     pattern = re.compile(r"""
-    \s |                                # matches all whitespace characters OR
-     (                                  #
-        /\*                             # /* AND
-        [                               # 0 or more of any character
-            \w\s                        #
-            (?=\*)                      # (positive lookahead: doesn't make * part of the match)
-            :@!"'~,#%&-=;<>`            #
-            \.\^\$\+\{\[\]\\\|          #
-        ]*                              #
-        \*/                             # AND */
-     )                                  #
-     | //.*\n                           # OR any character from // until end-line (inclusive)
+    \s |                    # matches all whitespace characters OR
+     (                      # OR any char between /* */ (inclusive)
+        /\*
+        (.|\n)*?            # N.b. `*?` performs non-greedy match
+        \*/
+     )
+     | //.*\n               # OR any char from // until new-line (inclusive)
     """, re.VERBOSE)
 
     # read file and apply regex:
@@ -52,5 +48,5 @@ def minify(input_path, output_path, comments=False):
 #           Main            #
 #############################
 if __name__ == "__main__":
-    # specify input and output paths in args:
+    # specify input and output paths in command line args:
     minify(args[0], args[1])
