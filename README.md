@@ -3,10 +3,14 @@
 
 Automate your web development work -- the Python way. A work-in-progress.
 
+# BUG:
+NOTE: `minify` parser is bugged when it encounters child elements -- e.g.
+`.foobar ul` or `#main .subsection` or `#foo .bar ul` etc.
+
 ### API:
 - minify files:
-`$ python minify.py [path_to_input] [path_to_output]`:
-```Bash
+`$ python minify.py INPUT_PATH OUTPUT_PATH`:
+```shell
 python minify.py ./src/styles.css ./src/output.css 
 ```
 
@@ -14,9 +18,10 @@ python minify.py ./src/styles.css ./src/output.css
 - Python 3.x
 
 ### TODO:
-+ [ ] Add prettify function 
++ [ ] Add JS support
++ [ ] Add prettify function
 + [ ] Translate gruntfiles (to add more tasks)
-+ [ ] Ability to run automation via scripts
++ [ ] Add ability to run automation via scripts
 + [ ] Add error handling
 + [ ] Add cli
 + [ ] Add travis tests

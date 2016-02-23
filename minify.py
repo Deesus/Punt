@@ -4,24 +4,23 @@
     Copyright 2016 Dee Reddy
 
     TODO:
-        -Test for JS
+        -Add JS option
         -Better docstrings
 """
 import sys
 import re
 
-args = sys.argv[1:]
-
 
 def minify(input_path, output_path):
     """ Minifies/uglifies file
-    args:
-        input_path: input file path
-        output_path: write-out file path
-        comments: Boolean. If False, deletes comments during output.
-    returns:
+
+    Args:
+        input_path:     input file path
+        output_path:    write-out file path
+        comments:       Boolean. If False, deletes comments during output.
+    Returns:
         Minified string.
-    example:
+    Example:
         `$ python minify.py ./src/styles.css ./src/output.css`
     """
 
@@ -49,9 +48,10 @@ def minify(input_path, output_path):
     with open(output_path, "w+") as file_out:
         file_out.write(output)
 
-#############################
-#           Main            #
-#############################
+######################################
+#                 Main               #
+######################################
 if __name__ == "__main__":
     # specify input and output paths in command line args:
+    args = sys.argv[1:]
     minify(args[0], args[1])
