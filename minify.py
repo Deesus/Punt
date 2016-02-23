@@ -1,6 +1,11 @@
 """
+    Minify/uglify CSS files -- i.e. removes spaces and comments from files
+
     Copyright 2016 Dee Reddy
 
+    TODO:
+        -Test for JS
+        -Better docstrings
 """
 import sys
 import re
@@ -8,7 +13,7 @@ import re
 args = sys.argv[1:]
 
 
-def minify(input_path, output_path, comments=False):
+def minify(input_path, output_path):
     """ Minifies/uglifies file
     args:
         input_path: input file path
