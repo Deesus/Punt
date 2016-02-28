@@ -1,13 +1,14 @@
 """
     Minify/uglify CSS files -- i.e. removes spaces and comments from files
-    Specify input and output paths in command line arg:
+    S
+    pecify input and output paths in command line arg:
     `$ python minify.py ./src/styles.css ./src/output.css`
-
-    Copyright 2016 Dee Reddy
 
     TODO:
         -Add JS option (detect file type)
 """
+__author__ = ('Dee Reddy', "deesus@yandex.com")
+
 import sys
 import re
 
@@ -16,24 +17,30 @@ def minify(input_path, output_path):
     """ Minifies/uglifies file
 
         Args:
-            input_path:     input file path
-            output_path:    write-out file path
-            comments:       Boolean. If False, deletes comments during output.
+            input_path:     Input file path.
+            output_path:    Write-out file path.
         Returns:
             Minified string.
         Example:
             `$ python minify.py ./src/styles.css ./src/output.css`
     """
 
-    # matches all in-line and multi-line comments; matches all spaces:
+    # matches all in-line comments `//`,  multi-line comments `/**/`; matches all spaces:
     pattern = re.compile(r"""
-    \s |                    # matches all whitespace characters OR
-    (                       # OR any char between /* */ (inclusive)
+    # Match comments:
+    (                           # any char between `/* */` (inclusive)
         /\*
-        (.|\n)*?            # N.b. `*?` performs non-greedy match
+        (.|\n)*?                # (N.b. `*?` performs non-greedy match)
         \*/
     )
-    | //.*\n                # OR any char from // until new-line (inclusive)
+    | //.*\n                    # OR any char from `//` until new-line (inclusive)
+
+    # Match spaces:
+    | \s+(?=[^{]*})             # OR all space characters inside `{ }`
+    | \s(?={)                   # OR a whitespace before `{`
+    | \ {2,}                    # OR multiple space chars
+    | [\t\n\r\f\v]              # OR tab, linefeed, carriage return, form feed, vertical tab -- N.b.
+                                # we exclude `\ ` to preserve spaces between child selectors)
     """, re.VERBOSE)
 
     # read file and apply regex:

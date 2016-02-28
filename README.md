@@ -1,11 +1,7 @@
-# Punt - A Python Task Runner
+# Punt: "Python Grunt" - A Python Task Runner
 ###### The Python version of GruntJS
 
 Automate your web development work -- the Python way. A work-in-progress.
-
-# BUG:
-NOTE: `minify` parser is bugged when it encounters child elements -- e.g.
-`.foobar ul` or `#main .subsection` or `#foo .bar ul` etc.
 
 ### API:
 - minify files:
@@ -18,6 +14,7 @@ python minify.py ./src/styles.css ./src/output.css
 - Python 3.x
 
 ### TODO:
++ [ ] Add tokenizer/scanner
 + [ ] Add JS support
 + [ ] Add prettify function
 + [ ] Translate gruntfiles (to add more tasks)
