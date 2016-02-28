@@ -4,9 +4,9 @@
 Automate your web development work -- the Python way. A work-in-progress.
 
 ### API:
-- minify files:
+- Minify files:
 `$ python minify.py INPUT_PATH OUTPUT_PATH`:
-```shell
+```bash
 python minify.py ./src/styles.css ./src/output.css 
 ```
 
