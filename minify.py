@@ -7,7 +7,7 @@ import sys, re
     TODO:
         -Add JS option (detect file type)
 """
-__author__ = ('Dee Reddy', "deesus@yandex.com")
+__author__ = ('Dee Reddy', 'deesus@yandex.com')
 
 
 def minify(input_path, output_path):
@@ -22,22 +22,19 @@ def minify(input_path, output_path):
             `$ python minify.py ./src/styles.css ./src/output.css`
     """
 
-    # matches all in-line comments `//`,  multi-line comments `/**/`; matches all spaces:
+    # matches all in-line comments, multi-line comments, and all spaces:
     pattern = re.compile(r"""
     # Match comments:
-    (                           # any char between `/* */` (inclusive)
-        /\*
-        (.|\n)*?                # (N.b. `*?` performs non-greedy match)
-        \*/
-    )
-    | //.*\n                    # OR any char from `//` until new-line (inclusive)
+    (/\*(.|\n)*?\*/)    # Any char between `/* */` (inclusive) -- N.b.
+                        #   `*?` performs non-greedy match
+    | //.*\n            # OR any char from `//` until new-line (inclusive)
 
     # Match spaces:
-    | \s+(?=[^{]*})             # OR all space characters inside `{ }`
-    | \s(?={)                   # OR a whitespace before `{`
-    | \ {2,}                    # OR multiple space chars
-    | [\t\n\r\f\v]              # OR tab, linefeed, carriage return, form feed, vertical tab -- N.b.
-                                # we exclude `\ ` to preserve spaces between child selectors)
+    | \s+(?=[^{]*})     # OR all space chars inside `{ }` (assumes no dangling or nested braces)
+    | \s(?={)           # OR a whitespace before `{`
+    | \ {2,}            # OR multiple space chars
+    | [\t\n\r\f\v]      # OR tab, linefeed, carriage return, form feed, vertical tab -- N.b.
+                        #   we exclude `\ ` to preserve spaces between child selectors)
     """, re.VERBOSE)
 
     # read file and apply regex:
@@ -55,5 +52,4 @@ def minify(input_path, output_path):
 #                 Main               #
 ######################################
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    minify(args[0], args[1])
+    minify(sys.argv[1], sys.argv[2])
