@@ -19,8 +19,13 @@ python prettify.py ./src/styles.css ./src/output.css 2
 ### Requirements:
 - Python 3.x
 
+### Issues:
+- See ISSUES.md
+
 ### TODO:
 - Refactor:
++ [ ] Need a more robust parsing system to handle complexity of code syntax
++ [ ] C.f. `ISSUES.md`
 + [ ] Simplify/refactor regexes
 + [ ] `prettify` can't handle comments well (esp. with nested braces)
 + [ ] Add prettify options (amount of tab spacing or tab-character)
