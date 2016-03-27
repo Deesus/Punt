@@ -2,28 +2,29 @@
 ###### The Python version of GruntJS
 
 Automate your web development work -- the Python way. A work-in-progress.
+**NOTE: The project is currently not fit for production. Use for experimentation/development only.**
 
 ### API:
 - Minify files:
-`$ python minify.py INPUT_PATH OUTPUT_PATH`:
+Options: `INPUT_PATH OUTPUT_PATH`:
 ```bash
-python minify.py ./src/styles.css ./src/output.css 
+$ python minify.py ./src/styles.css ./src/output.css 
 ```
 
 - Prettify files:
-`$ python prettify.py INPUT_PATH OUTPUT_PATH [TAB_LENGTH]`:
+Options: `INPUT_PATH OUTPUT_PATH [TAB_LENGTH]`:
 ```bash
-python prettify.py ./src/styles.css ./src/output.css 2
+$ python prettify.py ./src/styles.css ./src/output.css 2
 ```
 
 ### Requirements:
-- Python 3.x
+Python 3.x
 
 ### Issues:
-- See ISSUES.md
+See ISSUES.md
 
 ### TODO:
-- Refactor:
+###### Refactor:
 + [ ] Need a more robust parsing system to handle complexity of code syntax
 + [ ] C.f. `ISSUES.md`
 + [ ] Simplify/refactor regexes
@@ -32,7 +33,7 @@ python prettify.py ./src/styles.css ./src/output.css 2
 + [ ] Add ability to parse JS in prettify/minify
 + [ ] Currently doesn't handle files w/ errors (e.g. dangling braces)
 
-- Future:
+###### Future:
 + [ ] Add tokenizer/scanner
 + [ ] Translate gruntfiles (to add more tasks)
 + [ ] Add ability to run automation via scripts

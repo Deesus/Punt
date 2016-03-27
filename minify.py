@@ -3,9 +3,6 @@ import sys, re
     Minify/uglify CSS files -- i.e. removes spaces and comments from files
     Specify input and output paths in command line arg:
     `$ python minify.py ./src/styles.css ./src/output.css`
-
-    TODO:
-        -Add JS option (detect file type)
 """
 __author__ = ('Dee Reddy', 'deesus@yandex.com')
 
@@ -14,10 +11,10 @@ def minify(input_path, output_path):
     """ Minifies/uglifies file
 
         Args:
-            input_path:     Input file path.
-            output_path:    Write-out file path.
+            input_path:     (str) Input file path.
+            output_path:    (str) Write-out file path.
         Returns:
-            Minified string.
+            Writes Minified file.
         Example:
             `$ python minify.py ./src/styles.css ./src/output.css`
     """
